@@ -2,16 +2,9 @@ import java.util.*;
 
 public class Main
 {
-    private static int num = 3;
-    private static int[] Code = new int[num];
-    private static String[] Name = new String[num];
-    private static double[] Price = new double[num]; //try
-    private static double[] Rent_day = new double[num];
-    private static int[] Status = new int[num];
-    private static int[] Date = new int[num];
-    private static double[] Deposit = new double[num];
-    private static int[] Date_return = new int[num];
-    private static double[] Pmember = {0, 0.05, 0.1};
+    public static Deque<Book> listBook = new ArrayDeque<>();
+
+
 
     public static void main(String[] args)
     {
@@ -33,9 +26,12 @@ public class Main
             try {
                 Scanner kb =new Scanner(System.in);
                 System.out.print("\t\t\tPress Select menu[1-5] : ");
-                //int number=kb.nextInt();
-                //System.out.println(number);
-            }catch(Exception e){
+                int number=kb.nextInt();
+                System.out.println(number);
+
+            }
+
+            catch(Exception e){
                 System.out.println("\n\n\t\t\tPlease use only number");
 
                 System.out.println("\n\n\t\t\t Book Land store.");
