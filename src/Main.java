@@ -50,7 +50,6 @@ public class Main {
                 case 1:
                     Input_Data();
 
-                    System.out.println(listBook);
 
                     break;
                 case 2:
@@ -133,9 +132,23 @@ public class Main {
 
         } while (con.equals("Y") || con.equals("y"));
 
+        try (BufferedWriter bW = new BufferedWriter(new FileWriter(new File("src/book.txt"))))
+        {
+            System.out.printf("\t\t\t%1$s  %2$s  %3$s  %4$s  %5$s  %6$s " + "\r\n",  newBook.getCode(), newBook.getName()
+                    , newBook.getPrice(), newBook.getRent_day(), newBook.getStatus(), newBook.getStatus());
+
+        bW.write(newBook.getCode()+ "," + newBook.getName()
+                +  "," +newBook.getPrice()+ "," + newBook.getRent_day() + "," + newBook.getStatus()+ "," + newBook.getStatus());
+
         listBook.addLast(newBook);
+        }
+
+        catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
     }
+
 
     private static void Edit_Delete_data()
     {
@@ -162,6 +175,7 @@ public class Main {
 //            {
 //                System.out.printf("\t\t\tEdit Code %1$s = ", Code[index]);
 //                excode = Integer.parseInt(new Scanner(System.in).nextLine());
+
 //                for (int i = 1; i <= top; i++)
 //                {
 //                    if (excode == Code[i] && Code[i] != 0) //เจอตัวซ้ำ&!=0
@@ -229,6 +243,7 @@ public class Main {
 
 //    static void Rent_Book(int top)
 //    {
+
 //        int excode,index;
 //        String con;
 //        do
@@ -341,6 +356,10 @@ public class Main {
 //        } while (con.equals("Y") || con.equals("y"));
 //
 //    }
+
+
+
+
 }
 
 

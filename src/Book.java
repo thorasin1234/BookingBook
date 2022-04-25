@@ -1,6 +1,6 @@
 public class Book {
 
-    private  int Code;
+    private  String Code;
     private  String Name;
     private  double Price; //try
     private  double Rent_day;
@@ -14,11 +14,11 @@ public class Book {
 
     }
 
-    public  int getCode() {
+    public  String getCode() {
         return Code;
     }
 
-    public  void setCode(int code) {
+    public  void setCode(String code) {
         Code = code;
     }
 
