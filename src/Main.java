@@ -8,6 +8,8 @@ public class Main {
     public static Rabob sys = new Rabob();
     public static Deque<Book> listBook = sys.loadBook();
 
+    static Scanner kb = new Scanner(System.in);
+
     public static void main(String[] args) {
 
         int select = 0;
@@ -23,7 +25,6 @@ public class Main {
 
 
                 System.out.print("\t\t\tPress Select menu[1-5] :  ");
-                Scanner kb = new Scanner(System.in);
                 int number=kb.nextInt();
                 System.out.print("\t\t\tkey number for confirm = ");
 
@@ -143,9 +144,7 @@ public class Main {
         do
         {
 //            index = 0;
-            check = 0;
 
-            Book selcectBook = new Book();
 
             Display_data();
 
@@ -153,14 +152,13 @@ public class Main {
             System.out.print("\t\t\tKey code =");
 
 
-            selcectBook.setCode(new Scanner(System.in).nextLine());
-
-            for (Book book : listBook)
-            {
+            Book selcectBook = Rabob.checkTheBook(listBook, kb.nextLine());
 
 
-                if (Objects.equals(book.getCode(), selcectBook.getCode())) {
-                    selcectBook = book;
+                if ( Objects.equals(selcectBook.getName(),"Not found" ) == false )
+
+                {
+
 
                     System.out.printf("\t\t\t%1$s  %2$s  %3$.2f  %4$.2f  %5$s  %6$s" + "\r\n", selcectBook.getCode(), selcectBook.getName()
                             , selcectBook.getPrice(), selcectBook.getRent_day(), selcectBook.getStatus(), selcectBook.getStatus());
@@ -182,92 +180,22 @@ public class Main {
                     selcectBook.setDate(0);
 
 
-                    try (BufferedWriter bW = new BufferedWriter(new FileWriter(new File("src/book.txt"))))
-                    {
-
-                        for (Book loopBook: listBook)
-                        {
-                            bW.write(loopBook.getCode()+ "," + loopBook.getName()
-                                    +  "," +loopBook.getPrice()+ "," + loopBook.getRent_day() + "," + loopBook.getStatus()+ "," + loopBook.getStatus());
-                            bW.newLine();
-                        }
-
-                    }
-
-                    catch (IOException e) {
-                        System.out.println("Error: " + e.getMessage());
-                    }
-
-                    check = 1;
+                    Rabob.writeOn(listBook);
 
                     break;
 
-
-
-
                 }
 
-
-            }
-
-            if (check == 0)
-            {
-                System.out.println("\t\t\tBook code not found"); //ไม่เจอตัวซ้ำ
-            }
-
-
-
-
-
-
-
-//            if (index != 0) //เจอตัวซ้ำ
-//            {
-//                System.out.printf("\t\t\tEdit Code %1$s = ", Code[index]);
-//                excode = Integer.parseInt(new Scanner(System.in).nextLine());
-
-//                for (int i = 1; i <= top; i++)
-//                {
-//                    if (excode == Code[i] && Code[i] != 0) //เจอตัวซ้ำ&!=0
-//                    {
-//                        check = 1; //ซ้ำ ไม่ยอมให้แก้
-//                    }
-//                }
-
-
-//                if (check == 0) //ไม่เจอตัวซ้ำ
-//                {
-
-//                    Code[index] = excode;
-//                    System.out.printf("\t\t\tEdit Name Book %1$s= ", Name[index]);
-//                    Name[index] = String.valueOf(new Scanner(System.in).nextLine());
-//                    System.out.printf("\t\t\tEdit Price %1$s= ", Price[index]);
-//                    Price[index] = Double.parseDouble(new Scanner(System.in).nextLine());
-//                    System.out.printf("\t\t\tEdit Rent per Day %1$s= ", Rent_day[index]);
-//                    Rent_day[index] = Double.parseDouble(new Scanner(System.in).nextLine());
-//                    System.out.printf("\t\t\tEdit Status %1$s= ", Status[index]);
-//                    Status[index] = Integer.parseInt(new Scanner(System.in).nextLine());
-//                    System.out.printf("\t\t\tEdit Data %1$s= ", Date[index]);
-//                    Date[index] = Integer.parseInt(new Scanner(System.in).nextLine());
-//                    System.out.println("\t\t\t.......................");
-
-
-
-//                }
-//                else
-//                {
-//                    System.out.println("\t\t\tData already exists, cannot edit data."); //เจอซ้ำ
-//                }
-//            }
-
-//            else
-//            {
-//                System.out.println("\t\t\tBook code not found"); //ไม่เจอตัวซ้ำ
-//            }
+                else
+                {
+                    System.out.println("\t\t\tBook code not found"); //ไม่เจอตัวซ้ำ
+                }
 
 
             System.out.print("\t\t\tDo you want to Edit Data [Y/N] :");
             con = String.valueOf(new Scanner(System.in).nextLine());
+
+
         } while (con.equals("Y") || con.equals("y"));
 
     }
@@ -296,44 +224,55 @@ public class Main {
 
 
 
-//    static void Rent_Book(int top)
-//    {
-//
-//        int excode,index;
-//        String con;
-//        do
-//        {
-//            index = 0;
-//
-//            System.out.println("\n\n\n\n\t\t\t------Rent Book------");
-//            System.out.print("\t\t\tKey Code =");
-//
-//
-//                if (Status[index] == 0) //มีหนังสือ
-//                {
-//                    System.out.printf("\t\t\tCode = %1$s" + "\r\n", Code[index]);
-//                    System.out.printf("\t\t\tName Book = %1$s" + "\r\n", Name[index]);
-//                    System.out.printf("\t\t\tRent per day = %1$.2f" + "\r\n", Rent_day[index]);
+    static void Rent_Book(int top)
+    {
+
+        String con;
+        do
+        {
+
+
+            System.out.println("\n\n\n\n\t\t\t------Rent Book------");
+            System.out.print("\t\t\tKey Code =");
+
+            Book selcectBook = Rabob.checkTheBook(listBook, kb.nextLine());
+
+
+                if ( Objects.equals(selcectBook.getName(),"Not found" ) == false ) //มีหนังสือ
+                {
+                    System.out.printf("\t\t\tCode = %1$s" + "\r\n", selcectBook.getCode());
+                    System.out.printf("\t\t\tName Book = %1$s" + "\r\n", selcectBook.getName());
+                    System.out.printf("\t\t\tRent per day = %1$.2f" + "\r\n", selcectBook.getRent_day());
+
 //                    Deposit[index] = Price[index] + (Price[index] / 2);
-//                    System.out.printf("\t\t\tDeposit of Book = %1$.2f" + "\r\n", Deposit[index]);
-//                    System.out.printf("\t\t\tStatus = %1$s" + "\r\n", Status[index]);
+                    selcectBook.setDeposit( (selcectBook.getPrice() + (selcectBook.getPrice()/2) ) );
+
+                    System.out.printf("\t\t\tDeposit of Book = %1$.2f" + "\r\n", selcectBook.getDeposit());
+                    System.out.printf("\t\t\tStatus = %1$s" + "\r\n", selcectBook.getStatus());
+
 //                    Status[index] = 1;
-//                    System.out.print("\t\t\tKey Date [1-30] = ");
-//                    Date[index] = Integer.parseInt(new Scanner(System.in).nextLine());
-//                }
-//
-//            else //ไม่มีหนังสือในร้านนี้
-//            {
-//                System.out.println("Book code not found");
-//            }
-//            System.out.print("\t\t\tDo you want to Rent Book. [Y/N] :");
-//            con = String.valueOf(new Scanner(System.in).nextLine());
-//        } while (con.equals("Y") || con.equals("y"));
-//
-//
-//
-//
-//    }
+                    selcectBook.setStatus(1);
+
+                    System.out.print("\t\t\tKey Date [1-30] = ");
+                    selcectBook.setDate(Integer.parseInt(new Scanner(System.in).nextLine()));
+
+                }
+
+
+
+
+            else //ไม่มีหนังสือในร้านนี้
+            {
+                System.out.println("Book code not found");
+            }
+
+            System.out.print("\t\t\tDo you want to Rent Book. [Y/N] :");
+            con = String.valueOf(new Scanner(System.in).nextLine());
+
+        } while (con.equals("Y") || con.equals("y"));
+
+
+    }
 
 
 

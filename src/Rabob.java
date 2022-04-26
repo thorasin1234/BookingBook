@@ -1,41 +1,10 @@
 import java.io.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Rabob {
-
-//    public Deque<Book> listBook = loadBook();
-
-    public static void writeOn(Deque<Book> listBook)
-    {
-
-
-        try (BufferedWriter bW = new BufferedWriter(new FileWriter(new File("src/book.txt"))))
-        {
-//            System.out.printf("\t\t\t%1$s  %2$s  %3$s  %4$s  %5$s  %6$s " + "\r\n",  newBook.getCode(), newBook.getName()
-//                    , newBook.getPrice(), newBook.getRent_day(), newBook.getStatus(), newBook.getStatus());
-
-            for (Book loopBook: listBook)
-            {
-                bW.write(loopBook.getCode()+ "," + loopBook.getName()
-                        +  "," +loopBook.getPrice()+ "," + loopBook.getRent_day() + "," + loopBook.getStatus()+ "," + loopBook.getStatus());
-                bW.newLine();
-            }
-
-//            bW.write(newBook.getCode()+ "," + newBook.getName()
-//                    +  "," +newBook.getPrice()+ "," + newBook.getRent_day() + "," + newBook.getStatus()+ "," + newBook.getStatus());
-//            bW.newLine();
-//
-//            listBook.addLast(newBook);
-        }
-
-        catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-
-    }
-
-
 
     public Deque<Book> loadBook() {
 
@@ -89,7 +58,8 @@ public class Rabob {
 
         }
 
-        catch (IOException e) {
+        catch (IOException e)
+        {
             System.out.println("Error: " + e.getMessage());
         }
 
@@ -99,5 +69,58 @@ public class Rabob {
 
 
     }
+
+
+//    public Deque<Book> listBook = loadBook();
+
+    public static void writeOn(Deque<Book> listBook)
+    {
+
+
+        try (BufferedWriter bW = new BufferedWriter(new FileWriter(new File("src/book.txt"))))
+        {
+//            System.out.printf("\t\t\t%1$s  %2$s  %3$s  %4$s  %5$s  %6$s " + "\r\n",  newBook.getCode(), newBook.getName()
+//                    , newBook.getPrice(), newBook.getRent_day(), newBook.getStatus(), newBook.getStatus());
+
+            for (Book loopBook: listBook)
+            {
+                bW.write(loopBook.getCode()+ "," + loopBook.getName()
+                        +  "," +loopBook.getPrice()+ "," + loopBook.getRent_day() + "," + loopBook.getStatus()+ "," + loopBook.getStatus());
+                bW.newLine();
+            }
+
+//            bW.write(newBook.getCode()+ "," + newBook.getName()
+//                    +  "," +newBook.getPrice()+ "," + newBook.getRent_day() + "," + newBook.getStatus()+ "," + newBook.getStatus());
+//            bW.newLine();
+//
+//            listBook.addLast(newBook);
+        }
+
+        catch (IOException e)
+        {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+    }
+
+
+    public static Book checkTheBook(Deque<Book> listBook ,String aCode)
+    {
+
+        for (Book book : listBook)
+        {
+
+            if (Objects.equals(book.getCode(), aCode)) {
+
+                return book;
+            }
+
+        }
+
+        return new Book("Not found");
+
+    }
+
+
 
 }

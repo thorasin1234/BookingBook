@@ -14,6 +14,13 @@ public class Book {
 
     }
 
+    public Book(String talangka)
+    {
+
+        this.Name = talangka;
+
+    }
+
     public  String getCode() {
         return Code;
     }
