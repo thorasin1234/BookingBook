@@ -276,72 +276,94 @@ public class Main {
 
 
 
-//    static void Return_Book(int top)
-//    {
-//        int excode, index, member, day;double Total_rent, Discount, Net_rental, Change_Money;
-//        String con;
-//        do
-//        {
-//            index = 0;
-//
-//            System.out.println("\n\n\n\n\t\t\t------Return Book------");
-//            System.out.print("\t\t\tKey code =");
-//            excode = Integer.parseInt(new Scanner(System.in).nextLine());
-//            for (int i = 1; i <= top; i++)
-//            {
-//                if (excode == Code[i])
-//                {
-//                   index = i;
-//                }
-//            }
-//          if (index != 0) //เจอหนังสือ
-//            {
-//               if (Status[index] == 1) //ยืมไปแล้ว
-//                {
-//                    System.out.printf("\t\t\tCode = %1$s" + "\r\n", Code[index]);
-//                    System.out.printf("\t\t\tName Book = %1$s" + "\r\n", Name[index]);         System.out.printf("\t\t\tRent per day = %1$s" + "\r\n", Rent_day[index]);
-//                    System.out.printf("\t\t\tDeposit of Book = %1$s" + "\r\n", Deposit[index]);
-//                    System.out.printf("\t\t\tStatus = %1$s" + "\r\n", Status[index]);
+    static void Return_Book(int top)
+    {
+        int excode, index, member, day;double Total_rent, Discount, Net_rental, Change_Money;
+        String con;
+        do
+        {
+            index = 0;
+
+            System.out.println("\n\n\n\n\t\t\t------Return Book------");
+            System.out.print("\t\t\tKey code =");
+
+            Book selcectBook = Rabob.checkTheBook(listBook, kb.nextLine());
+
+            if ( Objects.equals(selcectBook.getName(),"Not found" ) == false )
+
+                if (Objects.equals(selcectBook.getStatus(), 1)) //ยืมไปแล้ว
+                {
+
+                    System.out.printf("\t\t\tCode = %1$s" + "\r\n", selcectBook.getCode());
+                    System.out.printf("\t\t\tName Book = %1$s" + "\r\n", selcectBook.getName());
+                    System.out.printf("\t\t\tRent per day = %1$s" + "\r\n", selcectBook.getRent_day());
+                    System.out.printf("\t\t\tDeposit of Book = %1$s" + "\r\n", selcectBook.getDeposit());
+                    System.out.printf("\t\t\tStatus = %1$s" + "\r\n", selcectBook.getStatus());
+
 //                    Status[index] = 0;
-//                    System.out.printf("\t\t\tDate Borrow = %1$s" + "\r\n", Date[index]);
-//                    System.out.print("\t\t\tDate Return = ");
+                    selcectBook.setStatus(0);
+
+                    System.out.printf("\t\t\tDate Borrow = %1$s" + "\r\n", selcectBook.getDate());
+
+                    System.out.print("\t\t\tDate Return = ");
+
 //                    Date_return[index] = Integer.parseInt(new Scanner(System.in).nextLine());
-//                    System.out.print("\t\t\tKey member [0 = No member , 1 = 1 Year , 2 = 2 Year => ");
-//                    member = Integer.parseInt(new Scanner(System.in).nextLine());
-//                    System.out.println("\t\t\t---------------------------------------------");
-//                    if (Date_return[index] >= Date[index]) //วันยืม>วันคืน
-//                   {
-//                        day = Date_return[index] - Date[index];
-//                    }
-//                    else //วันยืม<วันคืน
-//                    {
-//                        day = 30 - Date[index] + Date_return[index];
-//                    }
-//                    System.out.printf("\t\t\tRent day = %1$s" + "\r\n", day);
-//                    Total_rent = Rent_day[index] * day;
-//                    System.out.printf("\t\t\tTotal rent = %1$s" + "\r\n", Total_rent);
-//                    Discount = Total_rent * Pmember[member];
-//                    System.out.printf("\t\t\tDiscount = %1$s" + "\r\n", Discount);
-//                    Net_rental = Total_rent - Discount;
-//                   System.out.printf("\t\t\tNet rental = %1$s" + "\r\n", Net_rental);
-//                    Change_Money = Deposit[index] - Net_rental;
-//                    System.out.printf("\t\t\tChange Money = %1$s" + "\r\n", Net_rental);
-//                    Date[index] = 0;
-//                }
-//                else //ยังไม่ยื้ม
-//                {
-//                    System.out.println("\t\t\tThis book.txt code hasbeen rented.");
-//                }
-//            }
-//            else //ไม่เจอหนังสือ
-//            {
-//                System.out.println("\t\t\tBook code not found.");
-//           }
-//            System.out.print("\t\t\tDo you want to Return Book [Y/N] :");
-//            con = String.valueOf(new Scanner(System.in).nextLine());
-//        } while (con.equals("Y") || con.equals("y"));
-//
-//    }
+                    selcectBook.setDate_return(kb.nextInt());
+
+                    System.out.print("\t\t\tKey member [0 = No member , 1 = 1 Year , 2 = 2 Year => ");
+                    member = Integer.parseInt(new Scanner(System.in).nextLine());
+
+                    System.out.println("\t\t\t---------------------------------------------");
+
+
+                    if (selcectBook.getDate_return() >= selcectBook.getDate()) //วันยืม>วันคืน
+                    {
+                        day = selcectBook.getDate_return() - selcectBook.getDate();
+                    } else //วันยืม<วันคืน
+                    {
+                        day = 30 - selcectBook.getDate() + selcectBook.getDate_return();
+                    }
+
+
+                    System.out.printf("\t\t\tRent day = %1$s" + "\r\n", day);
+                    Total_rent = selcectBook.getRent_day() * day;
+                    System.out.printf("\t\t\tTotal rent = %1$s" + "\r\n", Total_rent);
+
+                    double[] Pmember = {0, 0.05, 0.1};
+
+                    Discount = Total_rent * Pmember[member];
+
+                    System.out.printf("\t\t\tDiscount = %1$s" + "\r\n", Discount);
+                    Net_rental = Total_rent - Discount;
+
+                    System.out.printf("\t\t\tNet rental = %1$s" + "\r\n", Net_rental);
+                    Change_Money = selcectBook.getDeposit()- Net_rental;
+
+                    System.out.printf("\t\t\tChange Money = %1$s" + "\r\n", Change_Money);
+
+                    selcectBook.setDate(0);
+
+                }
+
+            else //ยังไม่ยื้ม
+            {
+                    System.out.println("\t\t\tThis book.txt code has been rented.");
+            }
+
+
+            else //ไม่เจอหนังสือ
+            {
+                System.out.println("\t\t\tBook code not found.");
+            }
+
+            System.out.print("\t\t\tDo you want to Return Book [Y/N] :");
+            con = String.valueOf(new Scanner(System.in).nextLine());
+
+
+        } while (con.equals("Y") || con.equals("y"));
+
+
+    }
 
 
     public static void showMenu()
