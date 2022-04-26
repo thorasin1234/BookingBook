@@ -1,6 +1,4 @@
 import java.util.*;
-import java.util.ArrayList; // import the ArrayList class
-import java.io.*;
 
 
 public class Main {
@@ -25,8 +23,8 @@ public class Main {
 
 
                 System.out.print("\t\t\tPress Select menu[1-5] :  ");
-                int number=kb.nextInt();
-                System.out.print("\t\t\tkey number for confirm = ");
+                select = Integer.parseInt(new Scanner(System.in).nextLine());
+
 
             }
 
@@ -40,7 +38,7 @@ public class Main {
                 System.out.print("\t\t\tPress Select menu[1-5] : ");
             }
 
-            select = Integer.parseInt(new Scanner(System.in).nextLine());
+
             switch (select) {
                 case 1:
                     Input_Data();
@@ -56,10 +54,10 @@ public class Main {
                       Display_data();
                     break;
                 case 4:
-//                    Rent_Book();
+                    Rent_Book();
                     break;
                 case 5:
-//                    Return_Book();
+                    Return_Book();
                     break;
                 default:
                     System.out.println("\t\t\tInvalid Menu");
@@ -224,7 +222,7 @@ public class Main {
 
 
 
-    static void Rent_Book(int top)
+    static void Rent_Book()
     {
 
         String con;
@@ -279,7 +277,7 @@ public class Main {
 
 
 
-    static void Return_Book(int top)
+    static void Return_Book()
     {
         int excode, index, member, day;double Total_rent, Discount, Net_rental, Change_Money;
         String con;
