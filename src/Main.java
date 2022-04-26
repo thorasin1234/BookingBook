@@ -25,10 +25,11 @@ public class Main {
 
             try {
 
+
+                System.out.print("\t\t\tPress Select menu[1-5] :  ");
                 Scanner kb = new Scanner(System.in);
-                System.out.print("\t\t\tPress Select menu[1-5] : ");
-                //int number=kb.nextInt();
-                //System.out.println(number);
+                int number=kb.nextInt();
+                System.out.print("\t\t\tkey number for confirm = ");
 
             }
             catch (Exception e) {
@@ -285,7 +286,7 @@ public class Main {
 //                    System.out.print("\t\t\tKey Date [1-30] = ");
 //                    Date[index] = Integer.parseInt(new Scanner(System.in).nextLine());
 //                }
-//                else //ยื้มไปแล้ว
+//                else //ยืมไปแล้ว
 //                {
 //                    System.out.println("This book.txt code has been rented");
 //                }
