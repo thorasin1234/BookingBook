@@ -164,24 +164,89 @@ public class Main {
 
     private static void Edit_Delete_data()
     {
-//        int excode,index,check;
+        int excode,index,check;
         String con;
+
         do
         {
 //            index = 0;
-//            check = 0;
+            check = 0;
+
+            Book selcectBook = new Book();
+
+            Display_data();
 
             System.out.println("\n\n\n\n\t\t\t------Edit && Delete Data------");
             System.out.print("\t\t\tKey code =");
-//            excode = Integer.parseInt(new Scanner(System.in).nextLine());
 
-//            for (int i = 1; i <= top; i++)
-//            {
-//                if (excode == Code[i]) //เช็คตัวซ้ำ
-//                {
-//                    index = i; //ถ้าเจอตัวซ้ำให้เก็บหมายเลขช่องคัวซ้ำ
-//                }
-//            }
+
+            selcectBook.setCode(new Scanner(System.in).nextLine());
+
+            for (Book book : listBook)
+            {
+
+
+                if (Objects.equals(book.getCode(), selcectBook.getCode())) {
+                    selcectBook = book;
+
+                    System.out.printf("\t\t\t%1$s  %2$s  %3$.2f  %4$.2f  %5$s  %6$s" + "\r\n", selcectBook.getCode(), selcectBook.getName()
+                            , selcectBook.getPrice(), selcectBook.getRent_day(), selcectBook.getStatus(), selcectBook.getStatus());
+
+
+                    System.out.print("\t\t\tKey Name Book =");
+                    selcectBook.setName(String.valueOf(new Scanner(System.in).nextLine()));
+
+                    System.out.print("\t\t\tKey Price =");
+                    selcectBook.setPrice(Double.parseDouble(new Scanner(System.in).nextLine()));
+
+                    System.out.print("\t\t\tKey Rent for day =");
+                    selcectBook.setRent_day(Double.parseDouble(new Scanner(System.in).nextLine()));
+
+                    System.out.println("\t\t\t.......................");
+
+                    selcectBook.setStatus(0);
+
+                    selcectBook.setDate(0);
+
+
+                    try (BufferedWriter bW = new BufferedWriter(new FileWriter(new File("src/book.txt"))))
+                    {
+
+                        for (Book loopBook: listBook)
+                        {
+                            bW.write(loopBook.getCode()+ "," + loopBook.getName()
+                                    +  "," +loopBook.getPrice()+ "," + loopBook.getRent_day() + "," + loopBook.getStatus()+ "," + loopBook.getStatus());
+                            bW.newLine();
+                        }
+
+                    }
+
+                    catch (IOException e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+
+                    check = 1;
+
+                    break;
+
+
+
+
+                }
+
+
+            }
+
+            if (check == 0)
+            {
+                System.out.println("\t\t\tBook code not found"); //ไม่เจอตัวซ้ำ
+            }
+
+
+
+
+
+
 
 //            if (index != 0) //เจอตัวซ้ำ
 //            {
@@ -195,6 +260,8 @@ public class Main {
 //                        check = 1; //ซ้ำ ไม่ยอมให้แก้
 //                    }
 //                }
+
+
 //                if (check == 0) //ไม่เจอตัวซ้ำ
 //                {
 
@@ -219,10 +286,13 @@ public class Main {
 //                    System.out.println("\t\t\tData already exists, cannot edit data."); //เจอซ้ำ
 //                }
 //            }
+
 //            else
 //            {
 //                System.out.println("\t\t\tBook code not found"); //ไม่เจอตัวซ้ำ
 //            }
+
+
             System.out.print("\t\t\tDo you want to Edit Data [Y/N] :");
             con = String.valueOf(new Scanner(System.in).nextLine());
         } while (con.equals("Y") || con.equals("y"));
@@ -255,7 +325,7 @@ public class Main {
 
 //    static void Rent_Book(int top)
 //    {
-
+//
 //        int excode,index;
 //        String con;
 //        do
@@ -263,17 +333,9 @@ public class Main {
 //            index = 0;
 //
 //            System.out.println("\n\n\n\n\t\t\t------Rent Book------");
-//           System.out.print("\t\t\tKey Code =");
-//            excode = Integer.parseInt(new Scanner(System.in).nextLine());
-//            for (int i = 1; i <= top; i++)
-//            {
-//                if (excode == Code[i])
-//                {
-//                    index = i;
-//                }
-//            }
-//            if (index != 0) //มีหนังสือ
-//            {
+//            System.out.print("\t\t\tKey Code =");
+//
+//
 //                if (Status[index] == 0) //มีหนังสือ
 //                {
 //                    System.out.printf("\t\t\tCode = %1$s" + "\r\n", Code[index]);
@@ -286,11 +348,7 @@ public class Main {
 //                    System.out.print("\t\t\tKey Date [1-30] = ");
 //                    Date[index] = Integer.parseInt(new Scanner(System.in).nextLine());
 //                }
-//                else //ยืมไปแล้ว
-//                {
-//                    System.out.println("This book.txt code has been rented");
-//                }
-//            }
+//
 //            else //ไม่มีหนังสือในร้านนี้
 //            {
 //                System.out.println("Book code not found");
@@ -298,6 +356,10 @@ public class Main {
 //            System.out.print("\t\t\tDo you want to Rent Book. [Y/N] :");
 //            con = String.valueOf(new Scanner(System.in).nextLine());
 //        } while (con.equals("Y") || con.equals("y"));
+//
+//
+//
+//
 //    }
 
 
