@@ -256,6 +256,9 @@ public class Main {
                     System.out.print("\t\t\tKey Date [1-30] = ");
                     selcectBook.setDate(Integer.parseInt(new Scanner(System.in).nextLine()));
 
+
+                    Rabob.writeOn(listBook);
+
                 }
 
 
@@ -342,6 +345,8 @@ public class Main {
                     System.out.printf("\t\t\tChange Money = %1$s" + "\r\n", Change_Money);
 
                     selcectBook.setDate(0);
+
+                    Rabob.writeOn(listBook);
 
                 }
 
