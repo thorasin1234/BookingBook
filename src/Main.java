@@ -46,7 +46,7 @@ public class Main {
 
                     break;
                 case 2:
-                    Edit_Delete_data();
+                    Edit_Data();
 
 
                     break;
@@ -134,7 +134,7 @@ public class Main {
     }
 
 
-    private static void Edit_Delete_data()
+    private static void Edit_Data()
     {
         int excode,index,check;
         String con;
@@ -146,7 +146,7 @@ public class Main {
 
             Display_data();
 
-            System.out.println("\n\n\n\n\t\t\t------Edit && Delete Data------");
+            System.out.println("\n\n\n\n\t\t\t------ Edit ------");
             System.out.print("\t\t\tKey code =");
 
 
@@ -195,6 +195,9 @@ public class Main {
 
 
         } while (con.equals("Y") || con.equals("y"));
+
+
+
 
     }
 
@@ -374,7 +377,7 @@ public class Main {
         System.out.println("\t\t\t  Book Land store.");
         System.out.println("\t\t\t........Menu.......");
         System.out.println("\t\t\t1. Input Data.");
-        System.out.println("\t\t\t2. Edit && Delete data.");
+        System.out.println("\t\t\t2. Edit.");
         System.out.println("\t\t\t3. Display data.");
         System.out.println("\t\t\t4. Rent Book.");
         System.out.println("\t\t\t5. Return Book.");
